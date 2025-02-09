@@ -22,7 +22,10 @@ jobs:
           echo "Last run: $(date)" > last_run.txt
           git add last_run.txt
 
-      - name: Commit and Push (23f1002424@ds.study.iitm.ac.in)  # Email added in step name
+
+      - name: Commit and Push (23f1002424@ds.study.iitm.ac.in)
+        env:
+          PAT: ${{ secrets.GH_PAT }}
         run: |
           git commit -m "Automated daily commit at $(date)" || echo "No changes to commit"
-          git push
+          git push https://$PAT@github.com/Adityism/daily-commit-bot.git main
